@@ -219,6 +219,7 @@ class LeRobotFlexivDataConfig(DataConfigFactory):
         # The repack transform simply remaps key names here.
         print("-----------------")
         print("Data is loading..")
+        print("-----------------")
         # pdb.set_trace()
         repack_transform = _transforms.Group(
             inputs=[
