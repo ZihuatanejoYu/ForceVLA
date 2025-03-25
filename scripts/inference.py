@@ -24,6 +24,8 @@ import cv2
 
 # Policy client
 from openpi_client import websocket_client_policy
+from openpi_client.runtime.agents import policy_agent as _policy_agent
+from openpi_client import action_chunk_broker
 
 # Camera module (假设你已经有一个相机模块)
 from utils.d415_double_rs_record import DualRealSenseModule, get_rgbd
@@ -61,6 +63,12 @@ def main(robot_ip, robot_local_ip, policy_host="localhost", policy_port=8000, co
     # 初始化策略客户端
     log.info("Initializing policy client...")
     client = websocket_client_policy.WebsocketClientPolicy(host=policy_host, port=policy_port)
+    agent=_policy_agent.PolicyAgent(
+        policy=action_chunk_broker.ActionChunkBroker(
+            policy=client,
+            action_horizon=20,
+        )
+    )
 
     # 初始化相机
     log.info("Initializing cameras...")
@@ -121,8 +129,8 @@ def main(robot_ip, robot_local_ip, policy_host="localhost", policy_port=8000, co
 
             # 调用策略服务器获取动作
             log.info("Querying policy server for actions...")
-            action_chunk = client.infer(observation)["actions"]
-            action = action_chunk[0]  # 使用第一个动作
+            action_chunk = agent.get_action(observation)["actions"]
+            action = action_chunk.tolist()  # 使用第一个动作
 
             # 解析动作
             target_pos = action[:3]  # 目标位置 (x, y, z)
