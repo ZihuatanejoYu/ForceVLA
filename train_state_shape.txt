@@ -1,0 +1,2504 @@
+TrainState(step=ShapeDtypeStruct(shape=(), dtype=int32, weak_type=True), params=State({
+  'PaliGemma': {
+    'img': {
+      'Transformer': {
+        'encoder_norm': {
+          'bias': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(1152,), dtype=float32)
+          ),
+          'scale': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(1152,), dtype=float32)
+          )
+        },
+        'encoderblock': {
+          'LayerNorm_0': {
+            'bias': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+            ),
+            'scale': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+            )
+          },
+          'LayerNorm_1': {
+            'bias': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+            ),
+            'scale': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+            )
+          },
+          'MlpBlock_0': {
+            'Dense_0': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 4304), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152, 4304), dtype=float32)
+              )
+            },
+            'Dense_1': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 4304, 1152), dtype=float32)
+              )
+            }
+          },
+          'MultiHeadDotProductAttention_0': {
+            'key': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 16, 72), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152, 16, 72), dtype=float32)
+              )
+            },
+            'out': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 16, 72, 1152), dtype=float32)
+              )
+            },
+            'query': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 16, 72), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152, 16, 72), dtype=float32)
+              )
+            },
+            'value': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 16, 72), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152, 16, 72), dtype=float32)
+              )
+            }
+          }
+        }
+      },
+      'embedding': {
+        'bias': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(1152,), dtype=float32)
+        ),
+        'kernel': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(14, 14, 3, 1152), dtype=float32)
+        )
+      },
+      'head': {
+        'bias': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(2048,), dtype=float32)
+        ),
+        'kernel': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(1152, 2048), dtype=float32)
+        )
+      },
+      'pos_embedding': VariableState(
+        type=Param,
+        value=ShapeDtypeStruct(shape=(1, 256, 1152), dtype=float32)
+      )
+    },
+    'llm': {
+      'embedder': {
+        'input_embedding': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(257152, 2048), dtype=bfloat16)
+        )
+      },
+      'final_norm': {
+        'scale': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(2048,), dtype=bfloat16)
+        )
+      },
+      'final_norm_1': {
+        'scale': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(1024,), dtype=bfloat16)
+        )
+      },
+      'layers': {
+        'attn': {
+          'attn_vec_einsum': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 256, 16), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 16, 2048), dtype=float32)
+            ),
+            'w': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 256, 2048), dtype=bfloat16)
+            )
+          },
+          'attn_vec_einsum_1': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 256, 32), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 32, 1024), dtype=float32)
+            ),
+            'w': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 256, 1024), dtype=bfloat16)
+            )
+          },
+          'kv_einsum': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 2048, 16), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 16, 256), dtype=float32)
+            ),
+            'w': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 2048, 256), dtype=bfloat16)
+            )
+          },
+          'kv_einsum_1': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 1024, 32), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 32, 256), dtype=float32)
+            ),
+            'w': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 1024, 256), dtype=bfloat16)
+            )
+          },
+          'q_einsum': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 2048, 16), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 16, 256), dtype=float32)
+            ),
+            'w': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 2048, 256), dtype=bfloat16)
+            )
+          },
+          'q_einsum_1': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 1024, 32), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 32, 256), dtype=float32)
+            ),
+            'w': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 1024, 256), dtype=bfloat16)
+            )
+          }
+        },
+        'mlp': {
+          'gating_einsum': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 2048, 16384), dtype=bfloat16)
+          ),
+          'gating_einsum_lora_a': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 2048, 16), dtype=float32)
+          ),
+          'gating_einsum_lora_b': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 16, 16384), dtype=float32)
+          ),
+          'linear': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 16384, 2048), dtype=bfloat16)
+          ),
+          'linear_lora_a': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 16384, 16), dtype=float32)
+          ),
+          'linear_lora_b': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 16, 2048), dtype=float32)
+          )
+        },
+        'mlp_1': {
+          'gating_einsum': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 1024, 4096), dtype=bfloat16)
+          ),
+          'gating_einsum_lora_a': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 1024, 32), dtype=float32)
+          ),
+          'gating_einsum_lora_b': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 32, 4096), dtype=float32)
+          ),
+          'linear': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 4096, 1024), dtype=bfloat16)
+          ),
+          'linear_lora_a': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 4096, 32), dtype=float32)
+          ),
+          'linear_lora_b': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 32, 1024), dtype=float32)
+          )
+        },
+        'pre_attention_norm': {
+          'scale': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2048), dtype=bfloat16)
+          )
+        },
+        'pre_attention_norm_1': {
+          'scale': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 1024), dtype=bfloat16)
+          )
+        },
+        'pre_ffw_norm': {
+          'scale': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2048), dtype=bfloat16)
+          )
+        },
+        'pre_ffw_norm_1': {
+          'scale': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 1024), dtype=bfloat16)
+          )
+        }
+      }
+    }
+  },
+  'action_in_proj': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(32, 1024), dtype=float32)
+    )
+  },
+  'action_out_proj': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(32,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024, 32), dtype=float32)
+    )
+  },
+  'action_time_mlp_in': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(2048, 1024), dtype=float32)
+    )
+  },
+  'action_time_mlp_out': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024, 1024), dtype=float32)
+    )
+  },
+  'force_in_proj': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(2048,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(6, 2048), dtype=float32)
+    )
+  },
+  'state_proj': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(32, 1024), dtype=float32)
+    )
+  }
+}), model_def=NodeDef(
+  type=Pi0_Guidance,
+  index=0,
+  attributes=('PaliGemma', 'action_dim', 'action_horizon', 'action_in_proj', 'action_out_proj', 'action_time_mlp_in', 'action_time_mlp_out', 'force_in_proj', 'limoe', 'max_token_len', 'state_proj'),
+  subgraphs={
+    'PaliGemma': NodeDef(
+      type=Dict,
+      index=1,
+      attributes=('img', 'llm'),
+      subgraphs={
+        'img': NodeDef(
+          type=ToNNX,
+          index=2,
+          attributes=('Transformer', 'embedding', 'head', 'linen_attributes', 'module', 'pos_embedding', 'rngs'),
+          subgraphs={
+            'Transformer': NodeDef(
+              type=dict,
+              index=-1,
+              attributes=('encoder_norm', 'encoderblock'),
+              subgraphs={
+                'encoder_norm': NodeDef(
+                  type=dict,
+                  index=-1,
+                  attributes=('bias', 'scale'),
+                  subgraphs={},
+                  static_fields={},
+                  leaves={
+                    'bias': VariableDef(
+                      type=Param,
+                      index=3,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    ),
+                    'scale': VariableDef(
+                      type=Param,
+                      index=4,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    )
+                  },
+                  metadata=None,
+                  index_mapping=None
+                ),
+                'encoderblock': NodeDef(
+                  type=dict,
+                  index=-1,
+                  attributes=('LayerNorm_0', 'LayerNorm_1', 'MlpBlock_0', 'MultiHeadDotProductAttention_0'),
+                  subgraphs={
+                    'LayerNorm_0': NodeDef(
+                      type=dict,
+                      index=-1,
+                      attributes=('bias', 'scale'),
+                      subgraphs={},
+                      static_fields={},
+                      leaves={
+                        'bias': VariableDef(
+                          type=Param,
+                          index=5,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'scale': VariableDef(
+                          type=Param,
+                          index=6,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        )
+                      },
+                      metadata=None,
+                      index_mapping=None
+                    ),
+                    'LayerNorm_1': NodeDef(
+                      type=dict,
+                      index=-1,
+                      attributes=('bias', 'scale'),
+                      subgraphs={},
+                      static_fields={},
+                      leaves={
+                        'bias': VariableDef(
+                          type=Param,
+                          index=7,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'scale': VariableDef(
+                          type=Param,
+                          index=8,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        )
+                      },
+                      metadata=None,
+                      index_mapping=None
+                    ),
+                    'MlpBlock_0': NodeDef(
+                      type=dict,
+                      index=-1,
+                      attributes=('Dense_0', 'Dense_1'),
+                      subgraphs={
+                        'Dense_0': NodeDef(
+                          type=dict,
+                          index=-1,
+                          attributes=('bias', 'kernel'),
+                          subgraphs={},
+                          static_fields={},
+                          leaves={
+                            'bias': VariableDef(
+                              type=Param,
+                              index=9,
+                              metadata={
+                                'get_value_hooks': (),
+                                'set_value_hooks': (),
+                                'create_value_hooks': (),
+                                'add_axis_hooks': (),
+                                'remove_axis_hooks': ()
+                              }
+                            ),
+                            'kernel': VariableDef(
+                              type=Param,
+                              index=10,
+                              metadata={
+                                'get_value_hooks': (),
+                                'set_value_hooks': (),
+                                'create_value_hooks': (),
+                                'add_axis_hooks': (),
+                                'remove_axis_hooks': ()
+                              }
+                            )
+                          },
+                          metadata=None,
+                          index_mapping=None
+                        ),
+                        'Dense_1': NodeDef(
+                          type=dict,
+                          index=-1,
+                          attributes=('bias', 'kernel'),
+                          subgraphs={},
+                          static_fields={},
+                          leaves={
+                            'bias': VariableDef(
+                              type=Param,
+                              index=11,
+                              metadata={
+                                'get_value_hooks': (),
+                                'set_value_hooks': (),
+                                'create_value_hooks': (),
+                                'add_axis_hooks': (),
+                                'remove_axis_hooks': ()
+                              }
+                            ),
+                            'kernel': VariableDef(
+                              type=Param,
+                              index=12,
+                              metadata={
+                                'get_value_hooks': (),
+                                'set_value_hooks': (),
+                                'create_value_hooks': (),
+                                'add_axis_hooks': (),
+                                'remove_axis_hooks': ()
+                              }
+                            )
+                          },
+                          metadata=None,
+                          index_mapping=None
+                        )
+                      },
+                      static_fields={},
+                      leaves={},
+                      metadata=None,
+                      index_mapping=None
+                    ),
+                    'MultiHeadDotProductAttention_0': NodeDef(
+                      type=dict,
+                      index=-1,
+                      attributes=('key', 'out', 'query', 'value'),
+                      subgraphs={
+                        'key': NodeDef(
+                          type=dict,
+                          index=-1,
+                          attributes=('bias', 'kernel'),
+                          subgraphs={},
+                          static_fields={},
+                          leaves={
+                            'bias': VariableDef(
+                              type=Param,
+                              index=13,
+                              metadata={
+                                'get_value_hooks': (),
+                                'set_value_hooks': (),
+                                'create_value_hooks': (),
+                                'add_axis_hooks': (),
+                                'remove_axis_hooks': ()
+                              }
+                            ),
+                            'kernel': VariableDef(
+                              type=Param,
+                              index=14,
+                              metadata={
+                                'get_value_hooks': (),
+                                'set_value_hooks': (),
+                                'create_value_hooks': (),
+                                'add_axis_hooks': (),
+                                'remove_axis_hooks': ()
+                              }
+                            )
+                          },
+                          metadata=None,
+                          index_mapping=None
+                        ),
+                        'out': NodeDef(
+                          type=dict,
+                          index=-1,
+                          attributes=('bias', 'kernel'),
+                          subgraphs={},
+                          static_fields={},
+                          leaves={
+                            'bias': VariableDef(
+                              type=Param,
+                              index=15,
+                              metadata={
+                                'get_value_hooks': (),
+                                'set_value_hooks': (),
+                                'create_value_hooks': (),
+                                'add_axis_hooks': (),
+                                'remove_axis_hooks': ()
+                              }
+                            ),
+                            'kernel': VariableDef(
+                              type=Param,
+                              index=16,
+                              metadata={
+                                'get_value_hooks': (),
+                                'set_value_hooks': (),
+                                'create_value_hooks': (),
+                                'add_axis_hooks': (),
+                                'remove_axis_hooks': ()
+                              }
+                            )
+                          },
+                          metadata=None,
+                          index_mapping=None
+                        ),
+                        'query': NodeDef(
+                          type=dict,
+                          index=-1,
+                          attributes=('bias', 'kernel'),
+                          subgraphs={},
+                          static_fields={},
+                          leaves={
+                            'bias': VariableDef(
+                              type=Param,
+                              index=17,
+                              metadata={
+                                'get_value_hooks': (),
+                                'set_value_hooks': (),
+                                'create_value_hooks': (),
+                                'add_axis_hooks': (),
+                                'remove_axis_hooks': ()
+                              }
+                            ),
+                            'kernel': VariableDef(
+                              type=Param,
+                              index=18,
+                              metadata={
+                                'get_value_hooks': (),
+                                'set_value_hooks': (),
+                                'create_value_hooks': (),
+                                'add_axis_hooks': (),
+                                'remove_axis_hooks': ()
+                              }
+                            )
+                          },
+                          metadata=None,
+                          index_mapping=None
+                        ),
+                        'value': NodeDef(
+                          type=dict,
+                          index=-1,
+                          attributes=('bias', 'kernel'),
+                          subgraphs={},
+                          static_fields={},
+                          leaves={
+                            'bias': VariableDef(
+                              type=Param,
+                              index=19,
+                              metadata={
+                                'get_value_hooks': (),
+                                'set_value_hooks': (),
+                                'create_value_hooks': (),
+                                'add_axis_hooks': (),
+                                'remove_axis_hooks': ()
+                              }
+                            ),
+                            'kernel': VariableDef(
+                              type=Param,
+                              index=20,
+                              metadata={
+                                'get_value_hooks': (),
+                                'set_value_hooks': (),
+                                'create_value_hooks': (),
+                                'add_axis_hooks': (),
+                                'remove_axis_hooks': ()
+                              }
+                            )
+                          },
+                          metadata=None,
+                          index_mapping=None
+                        )
+                      },
+                      static_fields={},
+                      leaves={},
+                      metadata=None,
+                      index_mapping=None
+                    )
+                  },
+                  static_fields={},
+                  leaves={},
+                  metadata=None,
+                  index_mapping=None
+                )
+              },
+              static_fields={},
+              leaves={},
+              metadata=None,
+              index_mapping=None
+            ),
+            'embedding': NodeDef(
+              type=dict,
+              index=-1,
+              attributes=('bias', 'kernel'),
+              subgraphs={},
+              static_fields={},
+              leaves={
+                'bias': VariableDef(
+                  type=Param,
+                  index=21,
+                  metadata={
+                    'get_value_hooks': (),
+                    'set_value_hooks': (),
+                    'create_value_hooks': (),
+                    'add_axis_hooks': (),
+                    'remove_axis_hooks': ()
+                  }
+                ),
+                'kernel': VariableDef(
+                  type=Param,
+                  index=22,
+                  metadata={
+                    'get_value_hooks': (),
+                    'set_value_hooks': (),
+                    'create_value_hooks': (),
+                    'add_axis_hooks': (),
+                    'remove_axis_hooks': ()
+                  }
+                )
+              },
+              metadata=None,
+              index_mapping=None
+            ),
+            'head': NodeDef(
+              type=dict,
+              index=-1,
+              attributes=('bias', 'kernel'),
+              subgraphs={},
+              static_fields={},
+              leaves={
+                'bias': VariableDef(
+                  type=Param,
+                  index=23,
+                  metadata={
+                    'get_value_hooks': (),
+                    'set_value_hooks': (),
+                    'create_value_hooks': (),
+                    'add_axis_hooks': (),
+                    'remove_axis_hooks': ()
+                  }
+                ),
+                'kernel': VariableDef(
+                  type=Param,
+                  index=24,
+                  metadata={
+                    'get_value_hooks': (),
+                    'set_value_hooks': (),
+                    'create_value_hooks': (),
+                    'add_axis_hooks': (),
+                    'remove_axis_hooks': ()
+                  }
+                )
+              },
+              metadata=None,
+              index_mapping=None
+            ),
+            'linen_attributes': NodeDef(
+              type=tuple,
+              index=-1,
+              attributes=(0, 1, 2, 3),
+              subgraphs={},
+              static_fields={
+                0: embedding,
+                1: head,
+                2: Transformer,
+                3: pos_embedding
+              },
+              leaves={},
+              metadata=None,
+              index_mapping=None
+            ),
+            'rngs': NodeDef(
+              type=NoneType,
+              index=-1,
+              attributes=(),
+              subgraphs={},
+              static_fields={},
+              leaves={},
+              metadata=None,
+              index_mapping=None
+            )
+          },
+          static_fields={
+            'module': _Module(
+                # attributes
+                num_classes = 2048
+                patch_size = (14, 14)
+                width = 1152
+                depth = 27
+                mlp_dim = 4304
+                num_heads = 16
+                posemb = 'learn'
+                rep_size = False
+                dropout = 0.0
+                pool_type = 'none'
+                head_zeroinit = True
+                scan = True
+                remat_policy = 'nothing_saveable'
+                dtype_mm = 'bfloat16'
+            )
+          },
+          leaves={
+            'pos_embedding': VariableDef(
+              type=Param,
+              index=25,
+              metadata={
+                'get_value_hooks': (),
+                'set_value_hooks': (),
+                'create_value_hooks': (),
+                'add_axis_hooks': (),
+                'remove_axis_hooks': ()
+              }
+            )
+          },
+          metadata=(<class 'flax.nnx.bridge.wrappers.ToNNX'>, False),
+          index_mapping=None
+        ),
+        'llm': NodeDef(
+          type=ToNNX,
+          index=26,
+          attributes=('embedder', 'final_norm', 'final_norm_1', 'layers', 'linen_attributes', 'module', 'rngs'),
+          subgraphs={
+            'embedder': NodeDef(
+              type=dict,
+              index=-1,
+              attributes=('input_embedding',),
+              subgraphs={},
+              static_fields={},
+              leaves={
+                'input_embedding': VariableDef(
+                  type=Param,
+                  index=27,
+                  metadata={
+                    'get_value_hooks': (),
+                    'set_value_hooks': (),
+                    'create_value_hooks': (),
+                    'add_axis_hooks': (),
+                    'remove_axis_hooks': ()
+                  }
+                )
+              },
+              metadata=None,
+              index_mapping=None
+            ),
+            'final_norm': NodeDef(
+              type=dict,
+              index=-1,
+              attributes=('scale',),
+              subgraphs={},
+              static_fields={},
+              leaves={
+                'scale': VariableDef(
+                  type=Param,
+                  index=28,
+                  metadata={
+                    'get_value_hooks': (),
+                    'set_value_hooks': (),
+                    'create_value_hooks': (),
+                    'add_axis_hooks': (),
+                    'remove_axis_hooks': ()
+                  }
+                )
+              },
+              metadata=None,
+              index_mapping=None
+            ),
+            'final_norm_1': NodeDef(
+              type=dict,
+              index=-1,
+              attributes=('scale',),
+              subgraphs={},
+              static_fields={},
+              leaves={
+                'scale': VariableDef(
+                  type=Param,
+                  index=29,
+                  metadata={
+                    'get_value_hooks': (),
+                    'set_value_hooks': (),
+                    'create_value_hooks': (),
+                    'add_axis_hooks': (),
+                    'remove_axis_hooks': ()
+                  }
+                )
+              },
+              metadata=None,
+              index_mapping=None
+            ),
+            'layers': NodeDef(
+              type=dict,
+              index=-1,
+              attributes=('attn', 'mlp', 'mlp_1', 'pre_attention_norm', 'pre_attention_norm_1', 'pre_ffw_norm', 'pre_ffw_norm_1'),
+              subgraphs={
+                'attn': NodeDef(
+                  type=dict,
+                  index=-1,
+                  attributes=('attn_vec_einsum', 'attn_vec_einsum_1', 'kv_einsum', 'kv_einsum_1', 'q_einsum', 'q_einsum_1'),
+                  subgraphs={
+                    'attn_vec_einsum': NodeDef(
+                      type=dict,
+                      index=-1,
+                      attributes=('lora_a', 'lora_b', 'w'),
+                      subgraphs={},
+                      static_fields={},
+                      leaves={
+                        'lora_a': VariableDef(
+                          type=Param,
+                          index=30,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'lora_b': VariableDef(
+                          type=Param,
+                          index=31,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'w': VariableDef(
+                          type=Param,
+                          index=32,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        )
+                      },
+                      metadata=None,
+                      index_mapping=None
+                    ),
+                    'attn_vec_einsum_1': NodeDef(
+                      type=dict,
+                      index=-1,
+                      attributes=('lora_a', 'lora_b', 'w'),
+                      subgraphs={},
+                      static_fields={},
+                      leaves={
+                        'lora_a': VariableDef(
+                          type=Param,
+                          index=33,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'lora_b': VariableDef(
+                          type=Param,
+                          index=34,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'w': VariableDef(
+                          type=Param,
+                          index=35,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        )
+                      },
+                      metadata=None,
+                      index_mapping=None
+                    ),
+                    'kv_einsum': NodeDef(
+                      type=dict,
+                      index=-1,
+                      attributes=('lora_a', 'lora_b', 'w'),
+                      subgraphs={},
+                      static_fields={},
+                      leaves={
+                        'lora_a': VariableDef(
+                          type=Param,
+                          index=36,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'lora_b': VariableDef(
+                          type=Param,
+                          index=37,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'w': VariableDef(
+                          type=Param,
+                          index=38,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        )
+                      },
+                      metadata=None,
+                      index_mapping=None
+                    ),
+                    'kv_einsum_1': NodeDef(
+                      type=dict,
+                      index=-1,
+                      attributes=('lora_a', 'lora_b', 'w'),
+                      subgraphs={},
+                      static_fields={},
+                      leaves={
+                        'lora_a': VariableDef(
+                          type=Param,
+                          index=39,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'lora_b': VariableDef(
+                          type=Param,
+                          index=40,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'w': VariableDef(
+                          type=Param,
+                          index=41,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        )
+                      },
+                      metadata=None,
+                      index_mapping=None
+                    ),
+                    'q_einsum': NodeDef(
+                      type=dict,
+                      index=-1,
+                      attributes=('lora_a', 'lora_b', 'w'),
+                      subgraphs={},
+                      static_fields={},
+                      leaves={
+                        'lora_a': VariableDef(
+                          type=Param,
+                          index=42,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'lora_b': VariableDef(
+                          type=Param,
+                          index=43,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'w': VariableDef(
+                          type=Param,
+                          index=44,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        )
+                      },
+                      metadata=None,
+                      index_mapping=None
+                    ),
+                    'q_einsum_1': NodeDef(
+                      type=dict,
+                      index=-1,
+                      attributes=('lora_a', 'lora_b', 'w'),
+                      subgraphs={},
+                      static_fields={},
+                      leaves={
+                        'lora_a': VariableDef(
+                          type=Param,
+                          index=45,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'lora_b': VariableDef(
+                          type=Param,
+                          index=46,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        ),
+                        'w': VariableDef(
+                          type=Param,
+                          index=47,
+                          metadata={
+                            'get_value_hooks': (),
+                            'set_value_hooks': (),
+                            'create_value_hooks': (),
+                            'add_axis_hooks': (),
+                            'remove_axis_hooks': ()
+                          }
+                        )
+                      },
+                      metadata=None,
+                      index_mapping=None
+                    )
+                  },
+                  static_fields={},
+                  leaves={},
+                  metadata=None,
+                  index_mapping=None
+                ),
+                'mlp': NodeDef(
+                  type=dict,
+                  index=-1,
+                  attributes=('gating_einsum', 'gating_einsum_lora_a', 'gating_einsum_lora_b', 'linear', 'linear_lora_a', 'linear_lora_b'),
+                  subgraphs={},
+                  static_fields={},
+                  leaves={
+                    'gating_einsum': VariableDef(
+                      type=Param,
+                      index=48,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    ),
+                    'gating_einsum_lora_a': VariableDef(
+                      type=Param,
+                      index=49,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    ),
+                    'gating_einsum_lora_b': VariableDef(
+                      type=Param,
+                      index=50,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    ),
+                    'linear': VariableDef(
+                      type=Param,
+                      index=51,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    ),
+                    'linear_lora_a': VariableDef(
+                      type=Param,
+                      index=52,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    ),
+                    'linear_lora_b': VariableDef(
+                      type=Param,
+                      index=53,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    )
+                  },
+                  metadata=None,
+                  index_mapping=None
+                ),
+                'mlp_1': NodeDef(
+                  type=dict,
+                  index=-1,
+                  attributes=('gating_einsum', 'gating_einsum_lora_a', 'gating_einsum_lora_b', 'linear', 'linear_lora_a', 'linear_lora_b'),
+                  subgraphs={},
+                  static_fields={},
+                  leaves={
+                    'gating_einsum': VariableDef(
+                      type=Param,
+                      index=54,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    ),
+                    'gating_einsum_lora_a': VariableDef(
+                      type=Param,
+                      index=55,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    ),
+                    'gating_einsum_lora_b': VariableDef(
+                      type=Param,
+                      index=56,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    ),
+                    'linear': VariableDef(
+                      type=Param,
+                      index=57,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    ),
+                    'linear_lora_a': VariableDef(
+                      type=Param,
+                      index=58,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    ),
+                    'linear_lora_b': VariableDef(
+                      type=Param,
+                      index=59,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    )
+                  },
+                  metadata=None,
+                  index_mapping=None
+                ),
+                'pre_attention_norm': NodeDef(
+                  type=dict,
+                  index=-1,
+                  attributes=('scale',),
+                  subgraphs={},
+                  static_fields={},
+                  leaves={
+                    'scale': VariableDef(
+                      type=Param,
+                      index=60,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    )
+                  },
+                  metadata=None,
+                  index_mapping=None
+                ),
+                'pre_attention_norm_1': NodeDef(
+                  type=dict,
+                  index=-1,
+                  attributes=('scale',),
+                  subgraphs={},
+                  static_fields={},
+                  leaves={
+                    'scale': VariableDef(
+                      type=Param,
+                      index=61,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    )
+                  },
+                  metadata=None,
+                  index_mapping=None
+                ),
+                'pre_ffw_norm': NodeDef(
+                  type=dict,
+                  index=-1,
+                  attributes=('scale',),
+                  subgraphs={},
+                  static_fields={},
+                  leaves={
+                    'scale': VariableDef(
+                      type=Param,
+                      index=62,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    )
+                  },
+                  metadata=None,
+                  index_mapping=None
+                ),
+                'pre_ffw_norm_1': NodeDef(
+                  type=dict,
+                  index=-1,
+                  attributes=('scale',),
+                  subgraphs={},
+                  static_fields={},
+                  leaves={
+                    'scale': VariableDef(
+                      type=Param,
+                      index=63,
+                      metadata={
+                        'get_value_hooks': (),
+                        'set_value_hooks': (),
+                        'create_value_hooks': (),
+                        'add_axis_hooks': (),
+                        'remove_axis_hooks': ()
+                      }
+                    )
+                  },
+                  metadata=None,
+                  index_mapping=None
+                )
+              },
+              static_fields={},
+              leaves={},
+              metadata=None,
+              index_mapping=None
+            ),
+            'linen_attributes': NodeDef(
+              type=tuple,
+              index=-1,
+              attributes=(0, 1, 2, 3),
+              subgraphs={},
+              static_fields={
+                0: final_norm,
+                1: embedder,
+                2: final_norm_1,
+                3: layers
+              },
+              leaves={},
+              metadata=None,
+              index_mapping=None
+            ),
+            'rngs': NodeDef(
+              type=NoneType,
+              index=-1,
+              attributes=(),
+              subgraphs={},
+              static_fields={},
+              leaves={},
+              metadata=None,
+              index_mapping=None
+            )
+          },
+          static_fields={
+            'module': Module(
+                # attributes
+                configs = [Config(width=2048, depth=18, mlp_dim=16384, num_heads=8, num_kv_heads=1, head_dim=256, lora_configs={'attn': LoRAConfig(rank=16, alpha=16.0, init_fn=<function normal.<locals>.init at 0x7f1e50382ca0>, rslora=False, axes=(-2, -1), label='L'), 'ffn': LoRAConfig(rank=16, alpha=16.0, init_fn=<function normal.<locals>.init at 0x7f1e50382ca0>, rslora=False, axes=(-2, -1), label='L')}), Config(width=1024, depth=18, mlp_dim=4096, num_heads=8, num_kv_heads=1, head_dim=256, lora_configs={'attn': LoRAConfig(rank=32, alpha=32.0, init_fn=<function normal.<locals>.init at 0x7f1e50382ca0>, rslora=False, axes=(-2, -1), label='L'), 'ffn': LoRAConfig(rank=32, alpha=32.0, init_fn=<function normal.<locals>.init at 0x7f1e50382ca0>, rslora=False, axes=(-2, -1), label='L')})]
+                embed_dtype = 'bfloat16'
+                dropout = 0.0
+                dropout_bdims = ()
+            )
+          },
+          leaves={},
+          metadata=(<class 'flax.nnx.bridge.wrappers.ToNNX'>, False),
+          index_mapping=None
+        )
+      },
+      static_fields={},
+      leaves={},
+      metadata=(<class 'flax.nnx.helpers.Dict'>, False),
+      index_mapping=None
+    ),
+    'action_in_proj': NodeDef(
+      type=Linear,
+      index=64,
+      attributes=('bias', 'bias_init', 'dot_general', 'dtype', 'in_features', 'kernel', 'kernel_init', 'out_features', 'param_dtype', 'precision', 'use_bias'),
+      subgraphs={
+        'dtype': NodeDef(
+          type=NoneType,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        ),
+        'precision': NodeDef(
+          type=NoneType,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        )
+      },
+      static_fields={
+        'bias_init': <function zeros at 0x7f1f416a0a40>,
+        'dot_general': <function dot_general at 0x7f1f41ed68e0>,
+        'in_features': 32,
+        'kernel_init': <function variance_scaling.<locals>.init at 0x7f1f409ff560>,
+        'out_features': 1024,
+        'param_dtype': <class 'jax.numpy.float32'>,
+        'use_bias': True
+      },
+      leaves={
+        'bias': VariableDef(
+          type=Param,
+          index=65,
+          metadata={
+            'get_value_hooks': (),
+            'set_value_hooks': (),
+            'create_value_hooks': (),
+            'add_axis_hooks': (),
+            'remove_axis_hooks': ()
+          }
+        ),
+        'kernel': VariableDef(
+          type=Param,
+          index=66,
+          metadata={
+            'get_value_hooks': (),
+            'set_value_hooks': (),
+            'create_value_hooks': (),
+            'add_axis_hooks': (),
+            'remove_axis_hooks': ()
+          }
+        )
+      },
+      metadata=(<class 'flax.nnx.nn.linear.Linear'>, False),
+      index_mapping=None
+    ),
+    'action_out_proj': NodeDef(
+      type=Linear,
+      index=67,
+      attributes=('bias', 'bias_init', 'dot_general', 'dtype', 'in_features', 'kernel', 'kernel_init', 'out_features', 'param_dtype', 'precision', 'use_bias'),
+      subgraphs={
+        'dtype': NodeDef(
+          type=NoneType,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        ),
+        'precision': NodeDef(
+          type=NoneType,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        )
+      },
+      static_fields={
+        'bias_init': <function zeros at 0x7f1f416a0a40>,
+        'dot_general': <function dot_general at 0x7f1f41ed68e0>,
+        'in_features': 1024,
+        'kernel_init': <function variance_scaling.<locals>.init at 0x7f1f409ff560>,
+        'out_features': 32,
+        'param_dtype': <class 'jax.numpy.float32'>,
+        'use_bias': True
+      },
+      leaves={
+        'bias': VariableDef(
+          type=Param,
+          index=68,
+          metadata={
+            'get_value_hooks': (),
+            'set_value_hooks': (),
+            'create_value_hooks': (),
+            'add_axis_hooks': (),
+            'remove_axis_hooks': ()
+          }
+        ),
+        'kernel': VariableDef(
+          type=Param,
+          index=69,
+          metadata={
+            'get_value_hooks': (),
+            'set_value_hooks': (),
+            'create_value_hooks': (),
+            'add_axis_hooks': (),
+            'remove_axis_hooks': ()
+          }
+        )
+      },
+      metadata=(<class 'flax.nnx.nn.linear.Linear'>, False),
+      index_mapping=None
+    ),
+    'action_time_mlp_in': NodeDef(
+      type=Linear,
+      index=70,
+      attributes=('bias', 'bias_init', 'dot_general', 'dtype', 'in_features', 'kernel', 'kernel_init', 'out_features', 'param_dtype', 'precision', 'use_bias'),
+      subgraphs={
+        'dtype': NodeDef(
+          type=NoneType,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        ),
+        'precision': NodeDef(
+          type=NoneType,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        )
+      },
+      static_fields={
+        'bias_init': <function zeros at 0x7f1f416a0a40>,
+        'dot_general': <function dot_general at 0x7f1f41ed68e0>,
+        'in_features': 2048,
+        'kernel_init': <function variance_scaling.<locals>.init at 0x7f1f409ff560>,
+        'out_features': 1024,
+        'param_dtype': <class 'jax.numpy.float32'>,
+        'use_bias': True
+      },
+      leaves={
+        'bias': VariableDef(
+          type=Param,
+          index=71,
+          metadata={
+            'get_value_hooks': (),
+            'set_value_hooks': (),
+            'create_value_hooks': (),
+            'add_axis_hooks': (),
+            'remove_axis_hooks': ()
+          }
+        ),
+        'kernel': VariableDef(
+          type=Param,
+          index=72,
+          metadata={
+            'get_value_hooks': (),
+            'set_value_hooks': (),
+            'create_value_hooks': (),
+            'add_axis_hooks': (),
+            'remove_axis_hooks': ()
+          }
+        )
+      },
+      metadata=(<class 'flax.nnx.nn.linear.Linear'>, False),
+      index_mapping=None
+    ),
+    'action_time_mlp_out': NodeDef(
+      type=Linear,
+      index=73,
+      attributes=('bias', 'bias_init', 'dot_general', 'dtype', 'in_features', 'kernel', 'kernel_init', 'out_features', 'param_dtype', 'precision', 'use_bias'),
+      subgraphs={
+        'dtype': NodeDef(
+          type=NoneType,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        ),
+        'precision': NodeDef(
+          type=NoneType,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        )
+      },
+      static_fields={
+        'bias_init': <function zeros at 0x7f1f416a0a40>,
+        'dot_general': <function dot_general at 0x7f1f41ed68e0>,
+        'in_features': 1024,
+        'kernel_init': <function variance_scaling.<locals>.init at 0x7f1f409ff560>,
+        'out_features': 1024,
+        'param_dtype': <class 'jax.numpy.float32'>,
+        'use_bias': True
+      },
+      leaves={
+        'bias': VariableDef(
+          type=Param,
+          index=74,
+          metadata={
+            'get_value_hooks': (),
+            'set_value_hooks': (),
+            'create_value_hooks': (),
+            'add_axis_hooks': (),
+            'remove_axis_hooks': ()
+          }
+        ),
+        'kernel': VariableDef(
+          type=Param,
+          index=75,
+          metadata={
+            'get_value_hooks': (),
+            'set_value_hooks': (),
+            'create_value_hooks': (),
+            'add_axis_hooks': (),
+            'remove_axis_hooks': ()
+          }
+        )
+      },
+      metadata=(<class 'flax.nnx.nn.linear.Linear'>, False),
+      index_mapping=None
+    ),
+    'force_in_proj': NodeDef(
+      type=Linear,
+      index=76,
+      attributes=('bias', 'bias_init', 'dot_general', 'dtype', 'in_features', 'kernel', 'kernel_init', 'out_features', 'param_dtype', 'precision', 'use_bias'),
+      subgraphs={
+        'dtype': NodeDef(
+          type=NoneType,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        ),
+        'precision': NodeDef(
+          type=NoneType,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        )
+      },
+      static_fields={
+        'bias_init': <function zeros at 0x7f1f416a0a40>,
+        'dot_general': <function dot_general at 0x7f1f41ed68e0>,
+        'in_features': 6,
+        'kernel_init': <function variance_scaling.<locals>.init at 0x7f1f409ff560>,
+        'out_features': 2048,
+        'param_dtype': <class 'jax.numpy.float32'>,
+        'use_bias': True
+      },
+      leaves={
+        'bias': VariableDef(
+          type=Param,
+          index=77,
+          metadata={
+            'get_value_hooks': (),
+            'set_value_hooks': (),
+            'create_value_hooks': (),
+            'add_axis_hooks': (),
+            'remove_axis_hooks': ()
+          }
+        ),
+        'kernel': VariableDef(
+          type=Param,
+          index=78,
+          metadata={
+            'get_value_hooks': (),
+            'set_value_hooks': (),
+            'create_value_hooks': (),
+            'add_axis_hooks': (),
+            'remove_axis_hooks': ()
+          }
+        )
+      },
+      metadata=(<class 'flax.nnx.nn.linear.Linear'>, False),
+      index_mapping=None
+    ),
+    'limoe': NodeDef(
+      type=ToNNX,
+      index=79,
+      attributes=('linen_attributes', 'module', 'rngs'),
+      subgraphs={
+        'linen_attributes': NodeDef(
+          type=tuple,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        ),
+        'rngs': NodeDef(
+          type=NoneType,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        )
+      },
+      static_fields={
+        'module': LIMoEBlock(
+            # attributes
+            mlp_dim = 2048
+            num_heads = 8
+            out_dim = 1024
+            dtype = float32
+            num_experts = 4
+            num_top_k = 1
+            param_dtype = float32
+            kernel_init = init
+            bias_init = init
+            dropout_rate = 0.1
+            attention_dropout_rate = 0.1
+        )
+      },
+      leaves={},
+      metadata=(<class 'flax.nnx.bridge.wrappers.ToNNX'>, False),
+      index_mapping=None
+    ),
+    'state_proj': NodeDef(
+      type=Linear,
+      index=80,
+      attributes=('bias', 'bias_init', 'dot_general', 'dtype', 'in_features', 'kernel', 'kernel_init', 'out_features', 'param_dtype', 'precision', 'use_bias'),
+      subgraphs={
+        'dtype': NodeDef(
+          type=NoneType,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        ),
+        'precision': NodeDef(
+          type=NoneType,
+          index=-1,
+          attributes=(),
+          subgraphs={},
+          static_fields={},
+          leaves={},
+          metadata=None,
+          index_mapping=None
+        )
+      },
+      static_fields={
+        'bias_init': <function zeros at 0x7f1f416a0a40>,
+        'dot_general': <function dot_general at 0x7f1f41ed68e0>,
+        'in_features': 32,
+        'kernel_init': <function variance_scaling.<locals>.init at 0x7f1f409ff560>,
+        'out_features': 1024,
+        'param_dtype': <class 'jax.numpy.float32'>,
+        'use_bias': True
+      },
+      leaves={
+        'bias': VariableDef(
+          type=Param,
+          index=81,
+          metadata={
+            'get_value_hooks': (),
+            'set_value_hooks': (),
+            'create_value_hooks': (),
+            'add_axis_hooks': (),
+            'remove_axis_hooks': ()
+          }
+        ),
+        'kernel': VariableDef(
+          type=Param,
+          index=82,
+          metadata={
+            'get_value_hooks': (),
+            'set_value_hooks': (),
+            'create_value_hooks': (),
+            'add_axis_hooks': (),
+            'remove_axis_hooks': ()
+          }
+        )
+      },
+      metadata=(<class 'flax.nnx.nn.linear.Linear'>, False),
+      index_mapping=None
+    )
+  },
+  static_fields={
+    'action_dim': 32,
+    'action_horizon': 50,
+    'max_token_len': 48
+  },
+  leaves={},
+  metadata=(<class 'openpi.models.pi0_guidance.Pi0_Guidance'>, False),
+  index_mapping=None
+), opt_state=(EmptyState(), (ScaleByAdamState(count=ShapeDtypeStruct(shape=(), dtype=int32), mu=State({
+  'PaliGemma': {
+    'img': {
+      'Transformer': {
+        'encoder_norm': {
+          'bias': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(1152,), dtype=float32)
+          ),
+          'scale': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(1152,), dtype=float32)
+          )
+        },
+        'encoderblock': {
+          'LayerNorm_0': {
+            'bias': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+            ),
+            'scale': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+            )
+          },
+          'LayerNorm_1': {
+            'bias': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+            ),
+            'scale': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+            )
+          },
+          'MlpBlock_0': {
+            'Dense_0': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 4304), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152, 4304), dtype=float32)
+              )
+            },
+            'Dense_1': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 4304, 1152), dtype=float32)
+              )
+            }
+          },
+          'MultiHeadDotProductAttention_0': {
+            'key': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 16, 72), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152, 16, 72), dtype=float32)
+              )
+            },
+            'out': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 16, 72, 1152), dtype=float32)
+              )
+            },
+            'query': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 16, 72), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152, 16, 72), dtype=float32)
+              )
+            },
+            'value': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 16, 72), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152, 16, 72), dtype=float32)
+              )
+            }
+          }
+        }
+      },
+      'embedding': {
+        'bias': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(1152,), dtype=float32)
+        ),
+        'kernel': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(14, 14, 3, 1152), dtype=float32)
+        )
+      },
+      'head': {
+        'bias': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(2048,), dtype=float32)
+        ),
+        'kernel': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(1152, 2048), dtype=float32)
+        )
+      },
+      'pos_embedding': VariableState(
+        type=Param,
+        value=ShapeDtypeStruct(shape=(1, 256, 1152), dtype=float32)
+      )
+    },
+    'llm': {
+      'layers': {
+        'attn': {
+          'attn_vec_einsum': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 256, 16), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 16, 2048), dtype=float32)
+            )
+          },
+          'attn_vec_einsum_1': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 256, 32), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 32, 1024), dtype=float32)
+            )
+          },
+          'kv_einsum': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 2048, 16), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 16, 256), dtype=float32)
+            )
+          },
+          'kv_einsum_1': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 1024, 32), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 32, 256), dtype=float32)
+            )
+          },
+          'q_einsum': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 2048, 16), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 16, 256), dtype=float32)
+            )
+          },
+          'q_einsum_1': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 1024, 32), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 32, 256), dtype=float32)
+            )
+          }
+        },
+        'mlp': {
+          'gating_einsum_lora_a': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 2048, 16), dtype=float32)
+          ),
+          'gating_einsum_lora_b': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 16, 16384), dtype=float32)
+          ),
+          'linear_lora_a': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 16384, 16), dtype=float32)
+          ),
+          'linear_lora_b': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 16, 2048), dtype=float32)
+          )
+        },
+        'mlp_1': {
+          'gating_einsum_lora_a': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 1024, 32), dtype=float32)
+          ),
+          'gating_einsum_lora_b': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 32, 4096), dtype=float32)
+          ),
+          'linear_lora_a': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 4096, 32), dtype=float32)
+          ),
+          'linear_lora_b': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 32, 1024), dtype=float32)
+          )
+        }
+      }
+    }
+  },
+  'action_in_proj': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(32, 1024), dtype=float32)
+    )
+  },
+  'action_out_proj': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(32,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024, 32), dtype=float32)
+    )
+  },
+  'action_time_mlp_in': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(2048, 1024), dtype=float32)
+    )
+  },
+  'action_time_mlp_out': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024, 1024), dtype=float32)
+    )
+  },
+  'force_in_proj': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(2048,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(6, 2048), dtype=float32)
+    )
+  },
+  'state_proj': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(32, 1024), dtype=float32)
+    )
+  }
+}), nu=State({
+  'PaliGemma': {
+    'img': {
+      'Transformer': {
+        'encoder_norm': {
+          'bias': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(1152,), dtype=float32)
+          ),
+          'scale': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(1152,), dtype=float32)
+          )
+        },
+        'encoderblock': {
+          'LayerNorm_0': {
+            'bias': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+            ),
+            'scale': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+            )
+          },
+          'LayerNorm_1': {
+            'bias': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+            ),
+            'scale': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+            )
+          },
+          'MlpBlock_0': {
+            'Dense_0': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 4304), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152, 4304), dtype=float32)
+              )
+            },
+            'Dense_1': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 4304, 1152), dtype=float32)
+              )
+            }
+          },
+          'MultiHeadDotProductAttention_0': {
+            'key': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 16, 72), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152, 16, 72), dtype=float32)
+              )
+            },
+            'out': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 16, 72, 1152), dtype=float32)
+              )
+            },
+            'query': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 16, 72), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152, 16, 72), dtype=float32)
+              )
+            },
+            'value': {
+              'bias': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 16, 72), dtype=float32)
+              ),
+              'kernel': VariableState(
+                type=Param,
+                value=ShapeDtypeStruct(shape=(27, 1152, 16, 72), dtype=float32)
+              )
+            }
+          }
+        }
+      },
+      'embedding': {
+        'bias': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(1152,), dtype=float32)
+        ),
+        'kernel': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(14, 14, 3, 1152), dtype=float32)
+        )
+      },
+      'head': {
+        'bias': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(2048,), dtype=float32)
+        ),
+        'kernel': VariableState(
+          type=Param,
+          value=ShapeDtypeStruct(shape=(1152, 2048), dtype=float32)
+        )
+      },
+      'pos_embedding': VariableState(
+        type=Param,
+        value=ShapeDtypeStruct(shape=(1, 256, 1152), dtype=float32)
+      )
+    },
+    'llm': {
+      'layers': {
+        'attn': {
+          'attn_vec_einsum': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 256, 16), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 16, 2048), dtype=float32)
+            )
+          },
+          'attn_vec_einsum_1': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 256, 32), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 32, 1024), dtype=float32)
+            )
+          },
+          'kv_einsum': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 2048, 16), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 16, 256), dtype=float32)
+            )
+          },
+          'kv_einsum_1': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 1024, 32), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 2, 1, 32, 256), dtype=float32)
+            )
+          },
+          'q_einsum': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 2048, 16), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 16, 256), dtype=float32)
+            )
+          },
+          'q_einsum_1': {
+            'lora_a': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 1024, 32), dtype=float32)
+            ),
+            'lora_b': VariableState(
+              type=Param,
+              value=ShapeDtypeStruct(shape=(18, 8, 32, 256), dtype=float32)
+            )
+          }
+        },
+        'mlp': {
+          'gating_einsum_lora_a': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 2048, 16), dtype=float32)
+          ),
+          'gating_einsum_lora_b': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 16, 16384), dtype=float32)
+          ),
+          'linear_lora_a': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 16384, 16), dtype=float32)
+          ),
+          'linear_lora_b': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 16, 2048), dtype=float32)
+          )
+        },
+        'mlp_1': {
+          'gating_einsum_lora_a': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 1024, 32), dtype=float32)
+          ),
+          'gating_einsum_lora_b': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 2, 32, 4096), dtype=float32)
+          ),
+          'linear_lora_a': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 4096, 32), dtype=float32)
+          ),
+          'linear_lora_b': VariableState(
+            type=Param,
+            value=ShapeDtypeStruct(shape=(18, 32, 1024), dtype=float32)
+          )
+        }
+      }
+    }
+  },
+  'action_in_proj': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(32, 1024), dtype=float32)
+    )
+  },
+  'action_out_proj': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(32,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024, 32), dtype=float32)
+    )
+  },
+  'action_time_mlp_in': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(2048, 1024), dtype=float32)
+    )
+  },
+  'action_time_mlp_out': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024, 1024), dtype=float32)
+    )
+  },
+  'force_in_proj': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(2048,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(6, 2048), dtype=float32)
+    )
+  },
+  'state_proj': {
+    'bias': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(1024,), dtype=float32)
+    ),
+    'kernel': VariableState(
+      type=Param,
+      value=ShapeDtypeStruct(shape=(32, 1024), dtype=float32)
+    )
+  }
+})), EmptyState(), ScaleByScheduleState(count=ShapeDtypeStruct(shape=(), dtype=int32)))), tx=GradientTransformationExtraArgs(init=<function chain.<locals>.init_fn at 0x7f1d8140d260>, update=<function chain.<locals>.update_fn at 0x7f1d8157e700>), ema_decay=None, ema_params=None)
