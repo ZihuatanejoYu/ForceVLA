@@ -187,10 +187,10 @@ class Pi0_Guidance(_model.BaseModel):
                 num_experts=4,
                 num_top_k=1,
                 num_heads=paligemma_config.num_heads,
-                out_dim=action_expert_config.width
+                out_dim=action_expert_config.width,
             )
         )
-        self.limoe.lazy_init(rngs.default.key.value, jnp.zeros((32, 200, paligemma_config.width)), deterministic=True, method="init")
+        self.limoe.lazy_init(jnp.zeros((32, 200, paligemma_config.width)), True, rngs=rngs)
 
     @at.typecheck
     def embed_prefix(
@@ -286,13 +286,12 @@ class Pi0_Guidance(_model.BaseModel):
             [prefix_tokens, suffix_tokens], mask=attn_mask, positions=positions
         )
 
-        pdb.set_trace()
         limoe_out = self.limoe(
             jnp.concatenate([prefix_out, force_tokens], axis=1),
-            deterministic=not train,
         )
 
-        v_t = self.action_out_proj(limoe_out[:, -self.action_horizon :] + suffix_out[:, -self.action_horizon :])
+        # pdb.set_trace()
+        v_t = self.action_out_proj(limoe_out[0][:, -self.action_horizon :] + suffix_out[:, -self.action_horizon :])
 
         return jnp.mean(jnp.square(v_t - u_t), axis=-1)
 
@@ -346,10 +345,9 @@ class Pi0_Guidance(_model.BaseModel):
 
             limoe_out = self.limoe(
                 jnp.concatenate([prefix_out_fix, force_tokens], axis=1),
-                deterministic=True,
             )
 
-            v_t = self.action_out_proj(limoe_out[:, -self.action_horizon :] + suffix_out[:, -self.action_horizon :])
+            v_t = self.action_out_proj(limoe_out[0][:, -self.action_horizon :] + suffix_out[:, -self.action_horizon :])
             # v_t = self.action_out_proj(suffix_out[:, -self.action_horizon :])
 
             return x_t + dt * v_t, time + dt

@@ -93,7 +93,6 @@ class Encoder1DBlock(nn.Module):
       mlp_dim: dimension of the mlp on top of attention block.
       dtype: the dtype of the computation (default: float32).
       dropout_rate: dropout rate.
-      attention_dropout_rate: dropout for attention heads.
       deterministic: bool, deterministic or not (to apply dropout).
       num_heads: Number of heads in nn.MultiHeadDotProductAttention
     """
@@ -102,7 +101,6 @@ class Encoder1DBlock(nn.Module):
     num_heads: int
     dtype: Dtype = jnp.float32
     dropout_rate: float = 0.1
-    attention_dropout_rate: float = 0.1
 
     @nn.compact
     def __call__(self, inputs, deterministic):
@@ -115,29 +113,29 @@ class Encoder1DBlock(nn.Module):
         Returns:
           output after transformer encoder block.
         """
-
+        # dropout_rng = self.make_rng('dropout')
         # Attention block.
-        x = nn.LayerNorm(dtype=self.dtype)(inputs)
-        x = nn.MultiHeadDotProductAttention(
+        y = nn.LayerNorm(name="encoder_in_norm", dtype=self.dtype)(inputs)
+        y = nn.MultiHeadDotProductAttention(
             dtype=self.dtype,
             kernel_init=nn.initializers.xavier_uniform(),
             broadcast_dropout=False,
             deterministic=deterministic,
-            dropout_rate=self.attention_dropout_rate,
             num_heads=self.num_heads,
             # why isn't this true by default???
             force_fp32_for_softmax=True,
-        )(x, x)
-        x = nn.Dropout(rate=self.dropout_rate)(x, deterministic=deterministic)
-        x = x + inputs
+        )(y, y)
+        y = nn.Dropout(rate=self.dropout_rate)(y, deterministic=deterministic)
+        inputs = y + inputs
 
         # MLP block.
-        y = nn.LayerNorm(dtype=self.dtype)(x)
+        # pdb.set_trace()
+        y = nn.LayerNorm(name="encoder_out_norm", dtype=self.dtype)(inputs)
         y = MlpBlock(mlp_dim=self.mlp_dim, dtype=self.dtype, dropout_rate=self.dropout_rate)(
             y, deterministic=deterministic
         )
 
-        return x + y
+        return inputs + y, None
 
 
 @flax.struct.dataclass
@@ -275,6 +273,7 @@ class MoeLayer(nn.Module):
         Raises:
         ValueError if an unrecognized dispatch algorithm is given.
         """
+        # pdb.set_trace()
         batch_size, seq_length, hidden_dim = inputs.shape
         num_tokens = batch_size * seq_length
 
@@ -706,7 +705,6 @@ class LIMoEBlock(nn.Module):
 
       mlp_dim: dimension of the mlp on top of attention block.
       dropout_rate: dropout rate.
-      attention_dropout_rate: dropout for attention heads.
       deterministic: bool, deterministic or not (to apply dropout).
       num_heads: Number of heads in nn.MultiHeadDotProductAttention
 
@@ -724,11 +722,11 @@ class LIMoEBlock(nn.Module):
     bias_init: Callable[[PRNGKey, Shape, Dtype], Array] = nn.initializers.normal(stddev=1e-6)
 
     dropout_rate: float = 0.1
-    attention_dropout_rate: float = 0.1
+    remat_policy: str = "nothing_saveable"
 
 
     @nn.compact
-    def __call__(self, inputs, deterministic):
+    def __call__(self, inputs, deterministic=True):
         """Applies Encoder1DBlock module.
 
         Args:
@@ -753,12 +751,13 @@ class LIMoEBlock(nn.Module):
             batch_prioritized_routing=True
         )
 
-        x = Encoder1DBlock(
+        x, _ = Encoder1DBlock(
+            name=f"encoderblock",
+            dtype=self.dtype,
             mlp_dim=self.mlp_dim,
             num_heads=self.num_heads,
-        )(
-            inputs, deterministic=deterministic
-        )
+            dropout_rate=self.dropout_rate,
+        )(inputs, deterministic)
 
         moe_out = MoeLayer(
             num_experts=self.num_experts,
@@ -770,8 +769,10 @@ class LIMoEBlock(nn.Module):
         )(
             x, enable_dropout=not deterministic
         )
+        # pdb.set_trace()
 
         x = x + moe_out
+        # pdb.set_trace()
 
         x = nn.Dense(
             features=self.out_dim,

@@ -85,11 +85,10 @@ def _load_weights_and_validate(loader: _weight_loaders.WeightLoader, params_shap
 def init_train_state(
     config: _config.TrainConfig, init_rng: at.KeyArrayLike, mesh: jax.sharding.Mesh, *, resume: bool
 ) -> tuple[training_utils.TrainState, Any]:
-    pdb.set_trace()
     tx = _optimizer.create_optimizer(config.optimizer, config.lr_schedule, weight_decay_mask=None)
 
     def init(rng: at.KeyArrayLike, partial_params: at.Params | None = None) -> training_utils.TrainState:
-        pdb.set_trace()
+        # pdb.set_trace()
         rng, model_rng = jax.random.split(rng)
         # initialize the model (and its parameters).
         model = config.model.create(model_rng)
@@ -101,6 +100,7 @@ def init_train_state(
             state.replace_by_pure_dict(partial_params)
             model = nnx.merge(graphdef, state)
 
+        # pdb.set_trace()
         params = nnx.state(model)
         # Convert frozen params to bfloat16.
         params = nnx_utils.state_map(params, config.freeze_filter, lambda p: p.replace(p.value.astype(jnp.bfloat16)))
@@ -121,6 +121,7 @@ def init_train_state(
     if resume:
         return train_state_shape, state_sharding
 
+    # pdb.set_trace()
     partial_params = _load_weights_and_validate(config.weight_loader, train_state_shape.params.to_pure_dict())
     replicated_sharding = jax.sharding.NamedSharding(mesh, jax.sharding.PartitionSpec())
 

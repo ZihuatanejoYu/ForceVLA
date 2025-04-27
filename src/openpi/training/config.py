@@ -875,6 +875,7 @@ _CONFIGS = [
         name="pi0_guidance_lora",
         # Here is an example of loading a pi0 model for LoRA fine-tuning.
         model=pi0_guidance.Pi0_GuidanceConfig(paligemma_variant="gemma_2b_lora", action_expert_variant="gemma_300m_lora"),
+        save_interval=100,
         data=LeRobotFlexivInputFDataConfig(
             repo_id="flexiv_1plug_insert_inputForce",
             base_config=DataConfig(
@@ -882,8 +883,8 @@ _CONFIGS = [
                 prompt_from_task=True,
             ),
         ),
-        weight_loader=weight_loaders.CheckpointWeightLoader("/home/qiaojun/flexiv_pi0-dev/params"),
-        num_train_steps=50_000,
+        weight_loader=weight_loaders.Pi0GuidanceWeightLoader("/home/qiaojun/flexiv_pi0-dev/params"),
+        num_train_steps=100,
         # The freeze filter defines which parameters should be frozen during training.
         # We have a convenience function in the model config that returns the default freeze filter
         # for the given model config for LoRA finetuning. Just make sure it matches the model config
