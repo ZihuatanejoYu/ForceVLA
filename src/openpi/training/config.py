@@ -841,7 +841,7 @@ _CONFIGS = [
         name="pi0_flexiv_lora_eef_pos_eef_action",
         model=pi0.Pi0Config(paligemma_variant="gemma_2b_lora", action_expert_variant="gemma_300m_lora"),
         data=LeRobotFlexivEEFEEFDataConfig(
-            repo_id="flexiv_1plug_insert_noForce",
+            repo_id="flexiv_shovel_cereals_noForce",
             base_config=DataConfig(
                 local_files_only=True,  # Set to True for local-only datasets.
                 prompt_from_task=True,
@@ -855,10 +855,29 @@ _CONFIGS = [
         ema_decay=None,
     ),
     TrainConfig(
+        name="pi0_fast_flexiv_noforce_lora",
+        model=pi0_fast.Pi0FASTConfig(
+            action_dim=7, action_horizon=10, max_token_len=180, paligemma_variant="gemma_2b_lora"
+        ),
+        data=LeRobotFlexivEEFEEFDataConfig(
+            repo_id="flexiv_shovel_cereals_noForce",
+            base_config=DataConfig(
+                local_files_only=True,  # Set to True for local-only datasets.
+                prompt_from_task=True,
+            ),
+        ),
+        weight_loader=weight_loaders.CheckpointWeightLoader("/home/qiaojun/flexiv_pi0-dev/openpi-assets/checkpoints/pi0_fast_base/params"),
+        num_train_steps=50_000,
+        freeze_filter=pi0_fast.Pi0FASTConfig(
+            action_dim=7, action_horizon=10, max_token_len=180, paligemma_variant="gemma_2b_lora"
+        ).get_freeze_filter(),
+        ema_decay=None,
+    ),
+    TrainConfig(
         name="pi0_flexiv_policy_input_force",
         model=pi0.Pi0Config(paligemma_variant="gemma_2b_lora", action_expert_variant="gemma_300m_lora"),
         data=LeRobotFlexivInputFDataConfig(
-            repo_id="flexiv_1plug_insert_inputForce",
+            repo_id="flexiv_shovel_cereals_inputForce",
             base_config=DataConfig(
                 local_files_only=True,  # Set to True for local-only datasets.
                 prompt_from_task=True,
@@ -873,26 +892,19 @@ _CONFIGS = [
     ),
     TrainConfig(
         name="pi0_guidance_lora",
-        # Here is an example of loading a pi0 model for LoRA fine-tuning.
         model=pi0_guidance.Pi0_GuidanceConfig(paligemma_variant="gemma_2b_lora", action_expert_variant="gemma_300m_lora"),
-        save_interval=100,
         data=LeRobotFlexivInputFDataConfig(
-            repo_id="flexiv_1plug_insert_inputForce",
+            repo_id="flexiv_shovel_cereals_inputForce",
             base_config=DataConfig(
                 local_files_only=True,  # Set to True for local-only datasets.
                 prompt_from_task=True,
             ),
         ),
         weight_loader=weight_loaders.Pi0GuidanceWeightLoader("/home/qiaojun/flexiv_pi0-dev/params"),
-        num_train_steps=100,
-        # The freeze filter defines which parameters should be frozen during training.
-        # We have a convenience function in the model config that returns the default freeze filter
-        # for the given model config for LoRA finetuning. Just make sure it matches the model config
-        # you chose above.
+        num_train_steps=50_000,
         freeze_filter=pi0_guidance.Pi0_GuidanceConfig(
             paligemma_variant="gemma_2b_lora", action_expert_variant="gemma_300m_lora"
         ).get_freeze_filter(),
-        # Turn off EMA for LoRA finetuning.
         ema_decay=None,
     ),
     TrainConfig(
