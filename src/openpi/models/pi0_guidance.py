@@ -344,7 +344,7 @@ class Pi0_Guidance(_model.BaseModel):
             assert prefix_out is None
 
             limoe_out = self.limoe(
-                jnp.concatenate([prefix_out_fix, force_tokens], axis=1),
+                jnp.concatenate([prefix_out_fix[:, :815], force_tokens], axis=1),
             )
 
             v_t = self.action_out_proj(limoe_out[0][:, -self.action_horizon :] + suffix_out[:, -self.action_horizon :])
