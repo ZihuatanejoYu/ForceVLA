@@ -171,14 +171,15 @@ class DataConfigFactory(abc.ABC):
             logging.info(f"Loaded norm stats from {combined_dir}")
             return norm_stats
         except FileNotFoundError:
-            if self.repo_ids and len(self.repo_ids) > 0:
-                first_repo_dir = str(assets_dir / self.repo_ids[0])
-                try:
-                    norm_stats = _normalize.load(_download.maybe_download(first_repo_dir))
-                    logging.info(f"Loaded norm stats from {first_repo_dir}")
-                    return norm_stats
-                except FileNotFoundError:
-                    logging.info(f"Norm stats not found in {first_repo_dir}, skipping.")
+            # if self.repo_ids and len(self.repo_ids) > 0:
+            #     first_repo_dir = str(assets_dir / self.repo_ids[0])
+            #     try:
+            #         norm_stats = _normalize.load(_download.maybe_download(first_repo_dir))
+            #         logging.info(f"Loaded norm stats from {first_repo_dir}")
+            #         return norm_stats
+            #     except FileNotFoundError:
+            #         logging.info(f"Norm stats not found in {first_repo_dir}, skipping.")
+            logging.info(f"Norm stats not found, skipping.")
         return None
 
 
@@ -519,6 +520,10 @@ _CONFIGS = [
             base_config=DataConfig(
                 local_files_only=True,  # Set to True for local-only datasets.
                 prompt_from_task=True,
+            ),
+            assets=AssetsConfig(
+                assets_dir="/home/hairuo/flexiv_pi0/assets/pi0_guidance_lora",
+                asset_id="flexiv_1plug_insert_inputForce+flexiv_insert_USB_inputForce+flexiv_peel_cucumber_inputForce+flexiv_pump_1bottle_inputForce+flexiv_wipe_board_inputForce",
             ),
         ),
         weight_loader=weight_loaders.Pi0GuidanceWeightLoader("s3://openpi-assets/checkpoints/pi0_base/params"),
