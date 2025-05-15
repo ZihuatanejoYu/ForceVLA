@@ -259,6 +259,18 @@ class MoeLayer(nn.Module):
         # 使用 callback 确保在非 JIT 环境下执行
         jax.debug.callback(_save_to_file, router_logits)
 
+    def save_router_probs(self, router_probs):
+        """使用 jax.debug.callback 安全保存 router probs"""
+        def _save_to_file(probs):
+            # 这个函数将在主机上执行，而不是在加速器上
+            probs_np = np.array(probs)
+            print(f"Saving router probs to file: {probs_np.shape}")
+            print(f"Router probs: {probs_np}")
+            torch.save(torch.from_numpy(probs_np), "./router_load/gating_probs.pt")
+        
+        # 使用 callback 确保在非 JIT 环境下执行
+        jax.debug.callback(_save_to_file, router_probs)
+
     @nn.compact
     def __call__(self,
                 inputs,
@@ -433,7 +445,7 @@ class MoeLayer(nn.Module):
                                 router_indices.router_z_loss,
                                 fraction_tokens_left_behind, router_confidence,
                                 expert_usage)
-        self.save_router_logits(router_indices.router_logits)
+        self.save_router_probs(router_indices.probs)
 
         return combined_outputs
 
@@ -505,7 +517,7 @@ class MoeLayer(nn.Module):
                                 router_mask.router_z_loss,
                                 fraction_tokens_left_behind, router_confidence,
                                 expert_usage)
-        self.save_router_logits(router_mask.router_logits)
+        self.save_router_probs(router_mask.probs)
 
         return combined_outputs
 
