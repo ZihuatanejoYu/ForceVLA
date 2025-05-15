@@ -899,6 +899,10 @@ _CONFIGS = [
                 local_files_only=True,  # Set to True for local-only datasets.
                 prompt_from_task=True,
             ),
+            assets=AssetsConfig(
+                assets_dir="/home/hairuo/flexiv_pi0/assets/pi0_guidance_lora",
+                asset_id="flexiv_1plug_insert_inputForce+flexiv_insert_USB_inputForce+flexiv_peel_cucumber_inputForce+flexiv_pump_1bottle_inputForce+flexiv_wipe_board_inputForce",
+            ),
         ),
         weight_loader=weight_loaders.Pi0GuidanceWeightLoader("s3://openpi-assets/checkpoints/pi0_base/params"),
         num_train_steps=15_000,

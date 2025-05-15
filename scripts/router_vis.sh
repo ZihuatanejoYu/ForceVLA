@@ -1,5 +1,10 @@
-source ./.venv/bin/activate
+source ../VLA/.venv/bin/activate
 
-export CUDA_VISIBLE_DEVICES=2
+export CUDA_VISIBLE_DEVICES=5
 
-XLA_PYTHON_CLIENT_MEM_FRACTION=0.98 uv run scripts/train.py pi0_guidance_lora --exp-name=pi0_guidance_router_vis_0515 --overwrite
+uv run scripts/eval_open_loop.py \
+    --repo-id flexiv/flexiv_1plug_insert_inputForce \
+    --episode-index 0 \
+    --prompt "Insert the power plug into the socket." \
+    --policy-host 127.0.0.1 --policy-port 8000 \
+    --output-dir results/
