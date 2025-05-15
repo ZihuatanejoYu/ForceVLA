@@ -23,6 +23,7 @@ import flax
 from flax.linen import partitioning as flax_partitioning
 import jax
 import jax.numpy as jnp
+import numpy as np
 
 import openpi.shared.array_typing as at
 
@@ -32,6 +33,8 @@ from flaxformer.architectures.moe import scatter_utils
 from flaxformer.components import dense
 from flaxformer.types import Array
 from flaxformer.types import DType
+
+import torch
 
 Array = Any
 PRNGKey = Any
@@ -244,6 +247,18 @@ class MoeLayer(nn.Module):
             raise ValueError(f'num_model_partitions={self.num_model_partitions} has '
                             'no effect; please set it to None instead.')
 
+    def save_router_logits(self, router_logits):
+        """使用 jax.debug.callback 安全保存 router logits"""
+        def _save_to_file(logits):
+            # 这个函数将在主机上执行，而不是在加速器上
+            logits_np = np.array(logits)
+            print(f"Saving router logits to file: {logits_np.shape}")
+            print(f"Router logits: {logits_np}")
+            torch.save(torch.from_numpy(logits_np), "./router_load/gating_logits.pt")
+        
+        # 使用 callback 确保在非 JIT 环境下执行
+        jax.debug.callback(_save_to_file, router_logits)
+
     @nn.compact
     def __call__(self,
                 inputs,
@@ -418,6 +433,7 @@ class MoeLayer(nn.Module):
                                 router_indices.router_z_loss,
                                 fraction_tokens_left_behind, router_confidence,
                                 expert_usage)
+        self.save_router_logits(router_indices.router_logits)
 
         return combined_outputs
 
@@ -489,6 +505,7 @@ class MoeLayer(nn.Module):
                                 router_mask.router_z_loss,
                                 fraction_tokens_left_behind, router_confidence,
                                 expert_usage)
+        self.save_router_logits(router_mask.router_logits)
 
         return combined_outputs
 

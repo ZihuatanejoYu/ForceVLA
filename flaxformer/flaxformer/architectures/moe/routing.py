@@ -56,7 +56,8 @@ class RouterIndices:
   combine_weights: Array
   auxiliary_loss: float
   router_z_loss: float = 0.
-
+  router_logits: Array | None = None      # <-- 新增
+  router_probs: Array | None = None        # <-- 新增
 
 @flax.struct.dataclass
 class RouterMask:
@@ -77,7 +78,7 @@ class RouterMask:
   combine_array: Array
   auxiliary_loss: float
   router_z_loss: float = 0.
-
+  router_logits: Array | None = None      # <-- 新增
 
 def _favor_one_hot_slices() -> bool:
   """Returns true iff running on TPUs."""
@@ -285,7 +286,14 @@ class Router(nn.Module):
                                                       padding_mask,
                                                       expert_capacity)
 
-    return instructions.replace(router_z_loss=_router_z_loss(router_logits))
+    # return instructions.replace(router_z_loss=_router_z_loss(router_logits))
+    # 把 z-loss 和 logits 一起写回
+    instructions = instructions.replace(
+        router_z_loss=_router_z_loss(router_logits),
+        router_logits=router_logits,          # <-- 新增
+        router_probs=router_probs,            # <-- 新增
+    )
+    return instructions
 
   def _compute_router_probabilities(self, token_inputs: Array, num_experts: int,
                                     apply_jitter: bool) -> Tuple[Array, Array]:
