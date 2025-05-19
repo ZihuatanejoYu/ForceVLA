@@ -20,6 +20,10 @@ wandb
 # Data
 data
 outputs
+router_load
+results
+assets
+checkpoints
 
 # Apple
 .DS_Store
