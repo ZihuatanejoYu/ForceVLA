@@ -3,6 +3,8 @@ assets/
 checkpoints/
 data/
 wandb/
+router_load/
+results/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
