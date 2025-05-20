@@ -24,6 +24,7 @@ router_load
 results
 assets
 checkpoints
+tests
 
 # Apple
 .DS_Store
