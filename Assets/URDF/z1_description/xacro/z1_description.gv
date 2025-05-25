@@ -1,0 +1,29 @@
+digraph G {
+node [shape=box];
+"link00" [label="link00"];
+"link01" [label="link01"];
+"link02" [label="link02"];
+"link03" [label="link03"];
+"link04" [label="link04"];
+"link05" [label="link05"];
+"link06" [label="link06"];
+"gripperStator" [label="gripperStator"];
+"gripperMover" [label="gripperMover"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"link00" -> "joint1" [label="xyz: 0 0 0.0585 \nrpy: 0 -0 0"]
+"joint1" -> "link01"
+"link01" -> "joint2" [label="xyz: 0 0 0.045 \nrpy: 0 -0 0"]
+"joint2" -> "link02"
+"link02" -> "joint3" [label="xyz: -0.35 0 0 \nrpy: 0 -0 0"]
+"joint3" -> "link03"
+"link03" -> "joint4" [label="xyz: 0.218 0 0.057 \nrpy: 0 -0 0"]
+"joint4" -> "link04"
+"link04" -> "joint5" [label="xyz: 0.07 0 0 \nrpy: 0 -0 0"]
+"joint5" -> "link05"
+"link05" -> "joint6" [label="xyz: 0.0492 0 0 \nrpy: 0 -0 0"]
+"joint6" -> "link06"
+"link06" -> "gripperStator" [label="xyz: 0.051 0 0 \nrpy: 0 -0 0"]
+"gripperStator" -> "gripperStator"
+"gripperStator" -> "jointGripper" [label="xyz: 0.049 0 0 \nrpy: 0 -0 0"]
+"jointGripper" -> "gripperMover"
+}

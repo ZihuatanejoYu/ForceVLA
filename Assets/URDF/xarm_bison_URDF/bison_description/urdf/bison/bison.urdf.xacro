@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+<robot name="bison_robot"
+  xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find bison_description)/urdf/bison/wheel.urdf.xacro" />
+  <xacro:include filename="$(find bison_description)/urdf/bison/materials.xacro" />
+  
+  <material name="White">
+    <color rgba="1 1 1 1"/>
+  </material>  
+  
+  <xacro:property name="wheel_length" value="0.142" />
+  <xacro:property name="wheel_radius" value="0.183" />
+
+  <property name="base_x_size" value="0.85" />
+  <property name="base_y_size" value="0.42" />
+  <property name="base_z_size" value="0.325" />
+ 
+  <xacro:macro name="bison_robot">
+    <link name="base_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://bison_description/meshes/Bison.stl"/>
+        </geometry>
+        <material name="White" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.2" rpy="0 0 0" />
+        <geometry>
+          <box size="1.1 0.7 0.4"/>
+        </geometry>
+      </collision>
+    </link>
+    <gazebo reference="base_link">
+      <material>Gazebo/White</material>
+    </gazebo>
+
+    <link name="colcum_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 1.5707" />
+        <geometry>
+          <mesh filename="package://bison_description/meshes/colunm.STL"/>
+        </geometry>
+        <material name="White" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.7" rpy="0 0 0" />
+        <geometry>
+          <box size="0.2 0.2 1.4"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="colcum_joint" type="fixed">
+      <origin xyz="00.21 0 0.2735" rpy="0 0 0" />
+      <parent link="base_link" />
+      <child link="colcum_link" />
+    </joint>
+
+    <gazebo reference="colcum_link">
+      <material>Gazebo/White</material>
+    </gazebo>
+   
+    <link name="imu_link"/>
+    <joint name="imu_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="base_link" />
+      <child link="imu_link" />
+    </joint>
+    <gazebo reference="imu_link" />
+
+    <link name="head_link"/>
+    <joint name="head_joint" type="fixed">
+      <origin xyz="0.21 0 1.439" rpy="0 0 0" />
+      <parent link="base_link" />
+      <child link="head_link" />
+    </joint>
+    <gazebo reference="head_link" />
+
+
+  <link name="front_laser_link"/>
+  <joint name="right_front_laser_joint" type="fixed">
+    <origin xyz="0.440 -0.250 0.308" rpy="0 0 -0.785398" />
+    <parent link="base_link" />
+    <child link="front_laser_link" />
+  </joint>
+  <gazebo reference="front_laser_link" />
+  
+  <link name="rear_laser_link"/>
+  <joint name="left_rear_laser_joint" type="fixed">
+    <origin xyz="-0.440 0.250 0.308" rpy="0 0 2.35619449" />
+    <parent link="base_link" />
+    <child link="rear_laser_link" />
+  </joint>
+  <gazebo reference="rear_laser_link" />
+
+  <link
+    name="servo_link1_link">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="7.39299387464192" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://bison_description/meshes/servo_link1.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://bison_description/meshes/servo_link1.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="servo_link1_joint"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0.2618" />
+    <parent
+      link="head_link" />
+    <child
+      link="servo_link1_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.35"
+      upper="2.35"
+      effort="0"
+      velocity="1" />
+  </joint>
+
+
+<link
+    name="servo_link2_link">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="7.39299387464192" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://bison_description/meshes/servo_link2.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://bison_description/meshes/servo_link2.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="servo_link2_joint"
+    type="revolute">
+    <origin
+      xyz="0.014 0 0.145"
+      rpy="0 0.2094 0" />
+    <parent
+      link="servo_link1_link" />
+    <child
+      link="servo_link2_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.48"
+      upper="1.48"
+      effort="0"
+      velocity="1" />
+  </joint>
+
+  <link name="camera_link"/>
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="0.03 0.015 0.085" rpy="0.0 0.0 0.0" />
+    <parent link="servo_link2_link" />
+    <child link="camera_link" />
+  </joint>
+
+
+    <xacro:bison_wheel wheel_prefix="front_left" front="true">
+      <origin xyz="0.305 0.344 0.042" rpy="3.1415 0 0" />
+    </xacro:bison_wheel>
+    <xacro:bison_wheel wheel_prefix="front_right" front="true">
+      <origin xyz="0.305 -0.344 0.042" rpy="0 0 0" />
+    </xacro:bison_wheel>
+    <xacro:bison_wheel wheel_prefix="rear_left" front="false">
+      <origin xyz="-0.305 0.344 0.042" rpy="0 0 3.1415" />
+    </xacro:bison_wheel>
+    <xacro:bison_wheel wheel_prefix="rear_right" front="false">
+      <origin xyz="-0.305 -0.344 0.042" rpy="-3.1415 0 3.1415" />
+    </xacro:bison_wheel>
+
+  </xacro:macro>
+</robot>
