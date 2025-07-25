@@ -77,15 +77,6 @@ def main(cfg):
     print(f"Rotation : {np.mean(rot_mses):.6f}")
     print(f"Gripper  : {np.mean(grip_mses):.6f}")
 
-    if cfg.output_dir:
-        out = Path(cfg.output_dir); out.mkdir(parents=True, exist_ok=True)
-        np.savez(
-            out / f"episode_{cfg.episode_index}_mse.npz",
-            pos=pos_mses, rot=rot_mses, grip=grip_mses,
-            avg_pos=np.mean(pos_mses), avg_rot=np.mean(rot_mses), avg_grip=np.mean(grip_mses)
-        )
-        print(f"Saved to {out}")
-
 # ───────────────────────── CLI ────────────────────────────────
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
@@ -94,5 +85,4 @@ if __name__ == "__main__":
     p.add_argument("--prompt",         required=True)
     p.add_argument("--policy-host",    default="localhost")
     p.add_argument("--policy-port",    type=int, default=8000)
-    p.add_argument("--output-dir",     type=Path, default=None)
     cfg = p.parse_args(); main(cfg)

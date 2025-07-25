@@ -41,7 +41,7 @@ Array = Any
 PRNGKey = Any
 Shape = tuple[int]
 Dtype = Any
-SAVE_PATH = "./router_load/gating_probs_all.pt"
+SAVE_PATH = "./router_load/gating_probs.pt"
 
 
 class IdentityLayer(nn.Module):
