@@ -51,6 +51,7 @@ class FlexivInputs(transforms.DataTransformFn):
         # since the pi0-FAST action_dim = 7, which is < state_dim = 8, so pad is skipped.
         # Keep this for your own dataset, but if your dataset stores the proprioceptive input
         # in a different key than "observation/state", you should change it below.
+        data["state"][7:] = 0.0  # Zero out the external force dimensions.
         state = transforms.pad_to_dim(data["state"], self.action_dim)
 
         # Possibly need to parse images to uint8 (H,W,C) since LeRobot automatically

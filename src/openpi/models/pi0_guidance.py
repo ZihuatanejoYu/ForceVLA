@@ -258,7 +258,8 @@ class Pi0_Guidance(_model.BaseModel):
         input_mask = jnp.concatenate(input_mask, axis=1)
         ar_mask = jnp.array(ar_mask)
 
-        force_tokens = self.force_in_proj(obs.state[:, 7:13])[:, None, :] # [b, 1, 2emb]
+        force_tokens = jnp.zeros((obs.state.shape[0], 1, self.force_in_proj.out_features))  # zero
+        print("Force Ablation---------------")
         return tokens, input_mask, ar_mask, force_tokens
 
     @override
@@ -287,7 +288,7 @@ class Pi0_Guidance(_model.BaseModel):
         )
 
         limoe_out = self.limoe(
-            jnp.concatenate([prefix_out, force_tokens], axis=1),
+            prefix_out[:, :815],
         )
 
         # pdb.set_trace()
@@ -344,7 +345,7 @@ class Pi0_Guidance(_model.BaseModel):
             assert prefix_out is None
 
             limoe_out = self.limoe(
-                jnp.concatenate([prefix_out_fix[:, :815], force_tokens], axis=1),
+                prefix_out_fix[:, :815],
             )
 
             v_t = self.action_out_proj(limoe_out[0][:, -self.action_horizon :] + suffix_out[:, -self.action_horizon :])

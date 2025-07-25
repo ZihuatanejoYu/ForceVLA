@@ -894,14 +894,14 @@ _CONFIGS = [
         name="pi0_guidance_lora",
         model=pi0_guidance.Pi0_GuidanceConfig(paligemma_variant="gemma_2b_lora", action_expert_variant="gemma_300m_lora"),
         data=LeRobotFlexivInputFDataConfig(
-            repo_id="flexiv_shovel_cereals_inputForce",
+            repo_id="flexiv_train/flexiv_1plug_insert_inputForce",
             base_config=DataConfig(
                 local_files_only=True,  # Set to True for local-only datasets.
                 prompt_from_task=True,
             ),
         ),
-        weight_loader=weight_loaders.Pi0GuidanceWeightLoader("/home/qiaojun/flexiv_pi0-dev/params"),
-        num_train_steps=50_000,
+        weight_loader=weight_loaders.Pi0GuidanceWeightLoader("s3://openpi-assets/checkpoints/pi0_base/params"),
+        num_train_steps=15_000,
         freeze_filter=pi0_guidance.Pi0_GuidanceConfig(
             paligemma_variant="gemma_2b_lora", action_expert_variant="gemma_300m_lora"
         ).get_freeze_filter(),
