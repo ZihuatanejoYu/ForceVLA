@@ -25,6 +25,14 @@ TOY_FEATURES = {
             "f_ext_base_frame"  # (6,)
         ],
     },
+    # "observation.state": {
+    #     "dtype": "float64",
+    #     "shape": (7,),
+    #     "names": [
+    #         "current_eef_pose",  # (6,)
+    #         "gripper_width",  # (1,)
+    #     ],
+    # },
     "observation.image": {
         "dtype": "video",
         "shape": (480, 640, 3),
