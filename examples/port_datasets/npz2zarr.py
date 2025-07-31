@@ -56,8 +56,8 @@ def main(raw_dir: Path, output_zarr_path: Path):
         else:
             raise ValueError("Mismatch in lengths of images, wrist_images, gripper_width, states, and actions.")
         
-        resized_images = np.array([cv2.resize(img, (640, 480)) for img in images])
-        resized_wrist_images = np.array([cv2.resize(img, (640, 480)) for img in wrist_images])
+        resized_images = np.array([cv2.resize(img, (320, 240)) for img in images])
+        resized_wrist_images = np.array([cv2.resize(img, (320, 240)) for img in wrist_images])
         front_camera_arrays.append(resized_images)
         wrist_images_arrays.append(resized_wrist_images)
         
@@ -126,8 +126,8 @@ def main(raw_dir: Path, output_zarr_path: Path):
     )
 
 if __name__ == "__main__":
-    raw_dir = Path("/data/hairuo/forcevla_train_raw/test")
-    output_zarr_path = Path("/home/hairuo/.cache/zarr")
+    raw_dir = Path("/data/hairuo/forcevla_train_raw/flexiv_insert_USB_raw")
+    output_zarr_path = Path("/home/hairuo/sdp/data/zarr/test_50.zarr")
     
     main(raw_dir, output_zarr_path)
     print(f"Successfully converted NPZ files to Zarr format at {output_zarr_path}")
